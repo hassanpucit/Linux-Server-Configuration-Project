@@ -141,6 +141,4 @@ Take a baseline installation of a Linux distribution on a virtual machine and pr
 17. Visit site at [http://52.66.198.16](http://52.66.198.16)
 
 Reference:
-
-https://github.com/arrickx/Linux-Server-Configuration
 https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-16-04
