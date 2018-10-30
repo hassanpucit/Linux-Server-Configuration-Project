@@ -4,21 +4,19 @@
 
 Take a baseline installation of a Linux distribution on a virtual machine and prepare it to host your web applications, to include installing updates, securing it from a number of attack vectors and installing/configuring web and database servers.
 
-- IP address: 54.27.39.133
+- IP address: 13.127.187.130
 
 - Accessible SSH port: 2200
 
-- Application URL: http://ec2-54-27-39-133.us-west-2.compute.amazonaws.com/
+- Application URL: http://ec2-13-127-187-130.us-west-2.compute.amazonaws.com/
 
 ### Steps
 
 1. Create new user named grader and give it the permission to sudo
-  - SSH into the server through `ssh -i ~/.ssh/udacity_key.rsa root@54.27.39.133`
+  - SSH into the server through `ssh -i ~/.ssh/LightsailDefaultKeyPair.pem  root@13.127.187.130`
   - Run `$ sudo adduser grader` to create a new user named grader
   - Create a new file in the sudoers directory with `sudo nano /etc/sudoers.d/grader`
   - Add the following text `grader ALL=(ALL:ALL) ALL`
-  - Run `sudo nano /etc/hosts`
-  - Prevent the error `sudo: unable to resolve host` by adding this line `127.0.1.1 ip-10-20-52-12`
    
 2. Update all currently installed packages
   - Download package lists with `sudo apt-get update`
@@ -27,9 +25,11 @@ Take a baseline installation of a Linux distribution on a virtual machine and pr
 3. Change SSH port from 22 to 2200
   - Run `sudo nano /etc/ssh/sshd_config`
   - Change the port from 22 to 2200
-  - Confirm by running `ssh -i ~/.ssh/udacity_key.rsa -p 2200 root@54.27.39.133`
+  - Confirm by running `ssh -i ~/.ssh/LightsailDefaultKeyPair.pem -p 2200 root@13.127.187.130`
   
 4. Configure the Uncomplicated Firewall (UFW) to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123)
+  - `sudo ufw default deny incoming`
+  - `sudo ufw default allow outgoing`
   - `sudo ufw allow 2200/tcp`
   - `sudo ufw allow 80/tcp`
   - `sudo ufw allow 123/udp`
@@ -45,7 +45,7 @@ Take a baseline installation of a Linux distribution on a virtual machine and pr
   - Run `sudo nano /etc/ssh/sshd_config`
   - Change `PermitRootLogin without-password` line to `PermitRootLogin no`
   - Restart ssh with `sudo service ssh restart`
-  - Now you are only able to login using `ssh -i ~/.ssh/udacity_key.rsa -p 2200 grader@54.27.39.133`
+  - Now you are only able to login using `ssh -i ~/.ssh/udacity_key.rsa -p 2200 grader@13.127.187.130`
  
 8. Install Apache
   - `sudo apt-get install apache2`
@@ -95,9 +95,9 @@ Take a baseline installation of a Linux distribution on a virtual machine and pr
   - Paste this code: 
   ```
   <VirtualHost *:80>
-      ServerName 54.27.39.133
-      ServerAlias ec2-54-27-39-133.us-west-2.compute.amazonaws.com
-      ServerAdmin admin@54.27.39.133
+      ServerName 13.127.187.130
+      ServerAlias ec2-13-127-187-130.us-west-2.compute.amazonaws.com
+      ServerAdmin admin@13.127.187.130
       WSGIDaemonProcess catalog python-path=/var/www/catalog:/var/www/catalog/venv/lib/python2.7/site-packages
       WSGIProcessGroup catalog
       WSGIScriptAlias / /var/www/catalog/catalog.wsgi
@@ -138,4 +138,4 @@ Take a baseline installation of a Linux distribution on a virtual machine and pr
 16. Restart Apache 
   - `sudo service apache2 restart`
   
-17. Visit site at [http://54.27.39.133](http://54.27.39.133)
+17. Visit site at [http://13.127.187.130](http://13.127.187.130)
