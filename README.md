@@ -8,7 +8,7 @@ Take a baseline installation of a Linux distribution on a virtual machine and pr
 
 - Accessible SSH port: 2200
 
-- Application URL: http://ec2-13-233-89-147.us-west-2.compute.amazonaws.com/
+- Application URL: http://arbisoft-udacity.kubernetes.linuxgurru.com
 
 ### Steps
 
